@@ -4,17 +4,17 @@ import 'address_model.dart';
 import 'courses_model.dart';
 
 class StudentsModel {
-  final int id;
+  final int? id;
   final String name;
-  final int age;
+  final int? age;
   final List<String> nameCourses;
-  final CoursesModel courses;
+  final List<CoursesModel> courses;
   final AddressModel address;
 
   StudentsModel({
-    required this.id,
+    this.id,
     required this.name,
-    required this.age,
+    this.age,
     required this.nameCourses,
     required this.courses,
     required this.address,
@@ -27,7 +27,7 @@ class StudentsModel {
       'name': name,
       'age': age,
       'nameCourses': nameCourses,
-      'courses': courses.toMap(),
+      'courses': courses.map((course) => course.toMap()).toList(),
       'adress': address.toMap(),
     };
   }
@@ -38,12 +38,15 @@ class StudentsModel {
   // fromMap recebe um map e retorna um modelo
   factory StudentsModel.fromMap(Map<String, dynamic> map) {
     return StudentsModel(
-      id: map['id'],
-      name: map['name'],
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
       age: map['age'],
-      nameCourses: map['nameCourses'],
-      courses: CoursesModel.fromMap(map['courses']),
-      address: AddressModel.fromMap(map['address']),
+      nameCourses: List.from(map['nameCourses'] ?? <String>[]),
+      courses: map['courses']
+              ?.map((courseMap) => CoursesModel.fromMap(courseMap))
+              .toList() ??
+          <CoursesModel>[],
+      address: AddressModel.fromMap(map['address'] ?? <String, dynamic>{}),
     );
   }
 

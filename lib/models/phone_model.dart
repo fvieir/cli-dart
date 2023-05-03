@@ -19,7 +19,10 @@ class PhoneModel {
   String toJson() => jsonEncode(toMap());
 
   factory PhoneModel.fromMap(Map<String, dynamic> map) {
-    return PhoneModel(ddd: map['ddd'], phone: map['phone']);
+    return PhoneModel(
+      ddd: map['ddd'] ?? 0,
+      phone: map['phone'] ?? '',
+    );
   }
 
   factory PhoneModel.fromJson(String json) {

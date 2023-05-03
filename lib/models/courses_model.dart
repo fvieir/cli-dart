@@ -26,9 +26,9 @@ class CoursesModel {
   // fromMap recebe um map e retorna um modelo
   factory CoursesModel.fromMap(Map<String, dynamic> map) {
     return CoursesModel(
-      id: map['id'],
-      name: map['name'],
-      isStudent: map['isStudent'],
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+      isStudent: map['isStudent'] ?? false,
     );
   }
 

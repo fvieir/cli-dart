@@ -38,8 +38,8 @@ class AddressModel {
       street: map['street'],
       number: map['number'],
       zipCode: map['zipCode'],
-      city: CityModel.fromMap(map['city']),
-      phone: PhoneModel.fromMap(map['phone']),
+      city: CityModel.fromMap(map['city'] ?? <String, dynamic>{}),
+      phone: PhoneModel.fromMap(map['phone'] ?? <String, dynamic>{}),
     );
   }
 
