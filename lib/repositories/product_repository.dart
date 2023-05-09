@@ -6,7 +6,7 @@ import '../models/courses_model.dart';
 
 class ProductRepository {
   Future<CoursesModel> findByName(String name) async {
-    var response =
+    final response =
         await http.get(Uri.parse('http://localhost:8080/products?name=$name'));
 
     if (response.statusCode != 200) {
