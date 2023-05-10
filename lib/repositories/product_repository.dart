@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../models/courses_model.dart';
+import '../src/models/courses_model.dart';
 
 class ProductRepository {
   Future<CoursesModel> findByName(String name) async {
