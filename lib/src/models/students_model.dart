@@ -43,7 +43,7 @@ class StudentsModel {
       age: map['age'],
       nameCourses: List.from(map['nameCourses'] ?? <String>[]),
       courses: map['courses']
-              ?.map((courseMap) => CoursesModel.fromMap(courseMap))
+              ?.map<CoursesModel>((course) => CoursesModel.fromMap(course))
               .toList() ??
           <CoursesModel>[],
       address: AddressModel.fromMap(map['address'] ?? <String, dynamic>{}),
