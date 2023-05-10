@@ -53,4 +53,9 @@ class StudentsModel {
   // fromJson recebe uma String e decodifica e retorna um map
   factory StudentsModel.fromJson(String json) =>
       StudentsModel.fromMap(jsonDecode(json));
+
+  @override
+  String toString() {
+    return 'StudentsModel(id: $id, name: $name, age: $age, nameCourses: $nameCourses, courses: $courses, address: $address)';
+  }
 }

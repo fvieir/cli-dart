@@ -15,8 +15,6 @@ class StudentRepository {
 
     final responseData = jsonDecode(response.body);
 
-    print(responseData);
-
     return responseData.map<StudentsModel>((student) {
       return StudentsModel.fromMap(student);
     }).toList();

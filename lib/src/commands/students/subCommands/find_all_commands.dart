@@ -21,6 +21,17 @@ class FindAllCommands extends Command {
     print('Apresentar também os cursos? (S ou N)?');
 
     final showCourses = stdin.readLineSync();
-    print(showCourses);
+    print('-------------------------------------');
+    print('Alunos:');
+    print('-------------------------------------');
+
+    for (var student in students) {
+      if (showCourses?.toLowerCase() == 's') {
+        print(
+            '${student.id} - ${student.name} ${student.courses.where((course) => course.isStudent).toList().map((course) => course.name)}');
+      } else {
+        print('${student.id} - ${student.name}');
+      }
+    }
   }
 }
