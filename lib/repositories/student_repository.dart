@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import '../models/students_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../src/models/students_model.dart';
 
 class StudentRepository {
   Future<List<StudentsModel>> findAll() async {
@@ -13,6 +14,8 @@ class StudentRepository {
     }
 
     final responseData = jsonDecode(response.body);
+
+    print(responseData);
 
     return responseData.map<StudentsModel>((student) {
       return StudentsModel.fromMap(student);
