@@ -1,32 +1,32 @@
-import 'dart:io';
-
 import 'package:args/command_runner.dart';
-
 import '../../../../repositories/student_repository.dart';
 
 class FindByIdCommands extends Command {
   final StudentRepository repository;
 
-  FindByIdCommands(this.repository);
+  FindByIdCommands(this.repository) {
+    argParser.addOption('id', abbr: 'i', help: 'Buscar Students por ID');
+  }
 
   @override
   String get description => 'find by id Students';
 
   @override
-  String get name => 'findById';
+  String get name => 'ById';
 
   @override
   void run() async {
     print('Buscando aluno por id...');
     print('---------------------------------------');
-    print('Informe o ID:');
-    var id = stdin.readLineSync();
 
-    if (id!.isEmpty) {
-      print('Por padrão vamos buscar o ID: 0');
-      id = '0';
+    var result = argResults?['id'];
+
+    if (result == null || result.isEmpty) {
+      print('Por favor informe o ID. Exe: Byid --id=0');
+      return;
     }
 
+    var id = int.parse(result);
     var student = await repository.findById(id);
 
     print('---------------------------------------');

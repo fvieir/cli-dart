@@ -20,7 +20,7 @@ class StudentRepository {
     }).toList();
   }
 
-  Future<StudentsModel> findById(String id) async {
+  Future<StudentsModel> findById(int id) async {
     final response =
         await http.get(Uri.parse('http://localhost:8080/students/$id'));
 
