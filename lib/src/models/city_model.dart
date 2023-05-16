@@ -24,12 +24,15 @@ class CityModel {
 
   factory CityModel.fromMap(Map<String, dynamic> map) {
     return CityModel(
-      id: map['id'],
-      name: map['name'],
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
     );
   }
 
   // fromJson recebe uma String e decodifica e retorna um map
   factory CityModel.fromJson(String json) =>
       CityModel.fromMap(jsonDecode(json));
+
+  @override
+  String toString() => 'CityModel(id: $id, name: $name)';
 }

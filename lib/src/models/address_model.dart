@@ -24,8 +24,8 @@ class AddressModel {
       'street': street,
       'number': number,
       'zipCode': zipCode,
-      'city': city.toMap,
-      'phone': phone.toMap,
+      'city': city.toMap(),
+      'phone': phone.toMap(),
     };
   }
 
@@ -35,9 +35,9 @@ class AddressModel {
   // fromMap recebe um map e retorna um modelo
   factory AddressModel.fromMap(Map<String, dynamic> map) {
     return AddressModel(
-      street: map['street'],
-      number: map['number'],
-      zipCode: map['zipCode'],
+      street: map['street'] ?? '',
+      number: map['number'] ?? 0,
+      zipCode: map['zipCode'] ?? '',
       city: CityModel.fromMap(map['city'] ?? <String, dynamic>{}),
       phone: PhoneModel.fromMap(map['phone'] ?? <String, dynamic>{}),
     );
@@ -46,4 +46,9 @@ class AddressModel {
   // fromJson recebe uma String e decodifica e retorna um map
   factory AddressModel.fromJson(String json) =>
       AddressModel.fromMap(jsonDecode(json));
+
+  @override
+  String toString() {
+    return 'AddressModel(street: $street, number: $number, zipCode: $zipCode, city: $city, phone: $phone)';
+  }
 }

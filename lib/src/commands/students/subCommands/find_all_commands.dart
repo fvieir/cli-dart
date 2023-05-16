@@ -19,12 +19,11 @@ class FindAllCommands extends Command {
     print('Aguarde buscando alunos ...');
     final students = await repository.findAll();
     print('Apresentar também os cursos? (S ou N)?');
-
     final showCourses = stdin.readLineSync();
+
     print('-------------------------------------');
     print('Alunos:');
     print('-------------------------------------');
-
     for (var student in students) {
       if (showCourses?.toLowerCase() == 's') {
         print(
