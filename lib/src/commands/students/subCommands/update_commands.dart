@@ -6,7 +6,6 @@ import '../../../../repositories/product_repository.dart';
 import '../../../../repositories/student_repository.dart';
 import '../../../models/address_model.dart';
 import '../../../models/city_model.dart';
-import '../../../models/courses_model.dart';
 import '../../../models/phone_model.dart';
 import '../../../models/students_model.dart';
 

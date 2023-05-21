@@ -29,7 +29,7 @@ class StudentRepository {
     }
 
     if (response.body == '{}') {
-      throw Exception();
+      throw Exception('Aluno não encontrado');
     }
 
     return StudentsModel.fromJson(response.body);
