@@ -1,54 +1,52 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import '../src/models/students_model.dart';
 
 class StudentRepository {
   Future<List<StudentsModel>> findAll() async {
-    final response =
-        await http.get(Uri.parse('http://localhost:8080/students'));
+    try {
+      final response = await Dio(BaseOptions(baseUrl: 'http://localhost:8080'))
+          .get('/students');
 
-    if (response.statusCode != 200) {
+      final responseData = response.data;
+
+      return responseData.map<StudentsModel>((student) {
+        return StudentsModel.fromMap(student);
+      }).toList();
+    } on DioError catch (e) {
       throw Exception();
     }
-
-    final responseData = jsonDecode(response.body);
-
-    return responseData.map<StudentsModel>((student) {
-      return StudentsModel.fromMap(student);
-    }).toList();
   }
 
   Future<StudentsModel> findById(int id) async {
-    final response =
-        await http.get(Uri.parse('http://localhost:8080/students/$id'));
+    try {
+      final response = await Dio(BaseOptions(
+              baseUrl: 'http://localhost:8080',
+              connectTimeout: Duration(seconds: 10)))
+          .get(
+        '/students',
+        queryParameters: {'id': id},
+      );
 
-    if (response.statusCode != 200) {
-      throw Exception();
+      if (response.data.isEmpty) {
+        throw Exception('Aluno não encontrado');
+      }
+
+      return StudentsModel.fromMap(response.data.first);
+    } on DioError catch (e) {
+      throw Exception(e.message);
     }
-
-    if (response.body == '{}') {
-      throw Exception('Aluno não encontrado');
-    }
-
-    return StudentsModel.fromJson(response.body);
   }
 
   Future<void> insert(StudentsModel students) async {
-    Map<String, String> headers = {
-      "content-Type": "application/json",
-      "accept": "application/json",
-    };
-
-    final response = await http.post(
-      Uri.parse('http://localhost:8080/students'),
-      body: students.toJson(),
-      headers: headers,
-    );
-
-    if (response.statusCode != 200) {
-      throw Exception();
+    try {
+      await Dio().post(
+        'http://localhost:8080/students',
+        data: students.toMap(),
+      );
+    } on DioError catch (e) {
+      throw Exception(e.message);
     }
   }
 
